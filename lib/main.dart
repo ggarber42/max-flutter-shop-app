@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/product_detail.dart';
 
 import './screens/product_overview.dart';
 
@@ -7,7 +8,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Lato'
       ),
       home: ProductOverview(),
+      routes: {
+        ProductDetail.routeName: (ctx) => ProductDetail()
+      },
     );
   }
 }
