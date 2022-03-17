@@ -43,6 +43,10 @@ class Products with ChangeNotifier{ /* with é para chamar o mixin */
     return [..._items];
   }
 
+  Product findById(String productId){
+    return items.firstWhere((product) => product.id == productId);
+  }
+
   void addProduct(){
     notifyListeners(); /* vem do mixin*/
   }
