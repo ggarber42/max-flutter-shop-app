@@ -6,7 +6,15 @@ import '../providers/products.dart';
 
 enum FilterOptions { Favorites, All }
 
-class ProductOverview extends StatelessWidget {
+class ProductOverview extends StatefulWidget {
+  @override
+  _ProductOverviewState createState() => _ProductOverviewState();
+}
+
+class _ProductOverviewState extends State<ProductOverview> {
+
+  var _showFavoritesOnly = false;
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context, listen: false);
@@ -16,11 +24,13 @@ class ProductOverview extends StatelessWidget {
         actions: [
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
-              if (selectedValue == FilterOptions.Favorites) {
-                productsData.showsFavoriteOnly();
-              } else if (selectedValue == FilterOptions.All) {
-                productsData.showAll();
-              }
+              setState(() {
+                if (selectedValue == FilterOptions.Favorites) {
+                  _showFavoritesOnly = true;
+                } else if (selectedValue == FilterOptions.All) {
+                  _showFavoritesOnly = false;
+                }
+              });
             },
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
@@ -32,7 +42,7 @@ class ProductOverview extends StatelessWidget {
           )
         ],
       ),
-      body: ProductsGrid(),
+      body: ProductsGrid(_showFavoritesOnly),
     );
   }
 }

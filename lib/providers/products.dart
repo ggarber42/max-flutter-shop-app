@@ -39,12 +39,7 @@ class Products with ChangeNotifier{ /* with é para chamar o mixin */
     ),
   ];
 
-  var _showFavoritesOnly = false;
-
   List<Product> get items{
-    if(_showFavoritesOnly){
-      return _items.where((product) => product.isFavorite).toList();
-    }
     return [..._items];
   }
 
@@ -56,13 +51,7 @@ class Products with ChangeNotifier{ /* with é para chamar o mixin */
     notifyListeners(); /* vem do mixin*/
   }
 
-  void showsFavoriteOnly(){
-    _showFavoritesOnly = true;
-    notifyListeners();
-  }
-
-  void showAll(){
-    _showFavoritesOnly = false;
-    notifyListeners();
+  List<Product> get favoriteItems{
+    return _items.where((product) => product.isFavorite).toList();
   }
 }
