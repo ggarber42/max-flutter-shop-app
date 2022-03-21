@@ -7,7 +7,8 @@ import '../screens/product_detail.dart';
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    /* refatorando com consumer, pra diminuir a area de rebuild */
+    final product = Provider.of<Product>(context, listen: false);
     return GridTile(
       child: GestureDetector(
           onTap: () {
@@ -23,14 +24,17 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: Theme.of(context).accentColor,
+          leading: Consumer<Product>(
+            builder: (ctx, product, child) => IconButton(
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: Theme.of(context).accentColor,
+              ),
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
             ),
-            onPressed: () {
-              product.toggleFavoriteStatus();
-            },
+            // child: Text('Never change') essa parte nunca irá rebuildar
           ),
           trailing: IconButton(
             icon: Icon(
