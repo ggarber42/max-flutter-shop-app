@@ -12,6 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /* quando criamos um objeto, usar o create */
     return ChangeNotifierProvider(
       create: (ctx) => Products(),
       child: MaterialApp(

@@ -17,8 +17,12 @@ class ProductsGrid extends StatelessWidget {
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10),
-        itemBuilder: (ctx, i) => ChangeNotifierProvider(
-              create: (_) => products[i],
+        /* 
+          quando já temos o objeto (product) e
+          estamos em gridView e listView utilizamos o ChangeNotifierProvider.value
+         */
+        itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
+              value: products[i],
               child: ProductItem(),
             ));
   }
