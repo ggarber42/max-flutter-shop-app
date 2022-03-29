@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart.dart';
+import '../widgets/bagde.dart';
 import '../widgets/products_grid.dart';
-import '../providers/products.dart';
 
 enum FilterOptions { Favorites, All }
 
@@ -12,12 +13,10 @@ class ProductOverview extends StatefulWidget {
 }
 
 class _ProductOverviewState extends State<ProductOverview> {
-
   var _showFavoritesOnly = false;
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('My Shop'),
@@ -39,6 +38,16 @@ class _ProductOverviewState extends State<ProductOverview> {
                   value: FilterOptions.Favorites),
               PopupMenuItem(child: Text('Show All'), value: FilterOptions.All)
             ],
+          ),
+          Consumer<Cart>(
+            builder: (_, cartData, builtChild) => Badge(
+              child: builtChild as Widget, // usa o child do builder e passa pro bagde. A ideia é criar não rebuildar o bagde inteiro
+              value: cartData.itemCount.toString(),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {},
+            ),
           )
         ],
       ),
