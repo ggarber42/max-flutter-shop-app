@@ -41,7 +41,7 @@ class _ProductOverviewState extends State<ProductOverview> {
           ),
           Consumer<Cart>(
             builder: (_, cartData, builtChild) => Badge(
-              child: builtChild as Widget, // usa o child do builder e passa pro bagde. A ideia é criar não rebuildar o bagde inteiro
+              child: builtChild as Widget, // usa o child do builder e passa pro bagde. A ideia é não rebuilder o bagde, só o value
               value: cartData.itemCount.toString(),
             ),
             child: IconButton(
