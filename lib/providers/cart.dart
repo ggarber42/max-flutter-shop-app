@@ -45,4 +45,9 @@ class Cart with ChangeNotifier {
     }
     notifyListeners(); // pra triggar rebuilds
   }
+
+  void removeItem(String productId){
+    _items.remove(productId);
+    notifyListeners();
+  }
 }
