@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../screens/cart.dart';
 import '../providers/cart.dart';
+
 import '../widgets/bagde.dart';
 import '../widgets/products_grid.dart';
+import '../widgets/app_drawer.dart';
 
 enum FilterOptions { Favorites, All }
 
@@ -55,6 +57,7 @@ class _ProductOverviewState extends State<ProductOverview> {
         ],
       ),
       body: ProductsGrid(_showFavoritesOnly),
+      drawer: AppDrawer(),
     );
   }
 }
